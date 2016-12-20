@@ -20,10 +20,10 @@ get '/' do
 end
 
 
-get '/faq' do
-	erb :faq
-
+get '/about' do
+	erb :about
 end
+
 
 
 
