@@ -14,7 +14,7 @@ def current_user
 end
 
 
-
+# general routes
 get '/' do
 	erb :home
 end
@@ -24,8 +24,41 @@ get '/about' do
 	erb :about
 end
 
+#users - create
+post '/users/create' do
+	@user = User.new(name: params['name'], email: params['email'], password: params['password'])
+	@user.save
+	# flash[:notice] = "Thanks for updating us, #{@user.name}!"
+	redirect "/users/#{@user.id}"
+
+end
 
 
 
+#users - read
+get '/users/:id' do
+	@user = User.find(params['id'])
+	erb :user
+end
+
+
+
+
+#users - updates
+post '/users/:id/update' do
+	@user = User.find(params['id'])
+	@user.update(name: params['name'], email: params['email'], password: params['password'])
+	redirect "/users/#{@user.id}"
+end
+
+
+
+#users - delete
+post '/users/:id/delete' do
+	@user = User.find(params['id'])
+	session[:user_id] = nil
+	@user.destroy
+	redirect '/'
+end
 
 
