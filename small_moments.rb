@@ -24,6 +24,30 @@ get '/about' do
 	erb :about
 end
 
+
+
+#login
+post '/login' do
+	@user = User.where(email: params['email']).first
+	if @user && @user.password == params['password']
+		session[:user_id] = @user.id
+		flash[:notice] = "Welcome back to Small Moments!"
+		redirect "/users/#{session[:user_id]}"
+	else
+		flash[:alert] = "Something doesn't sound right. Try again?"
+		redirect "/users/#{@user.id}"
+	end
+end
+
+
+#logout
+post '/logout' do
+	session[:user_id] = nil
+	redirect "/"
+end
+
+
+
 #users - create
 post '/users/create' do
 	@user = User.new(name: params['name'], email: params['email'], password: params['password'])
@@ -78,10 +102,17 @@ post '/users/:id/posts/create' do
 end
 
 
-#posts - read (individual post)
-get 'users/:id/posts/:id' do
+#posts - read (a user's individual post)
+get '/users/:id/posts/:id' do
+	@user = User.find(params['id'])
+	@post = Post.find(params['id'])
 	erb :post
 end
 
 
 #posts - update
+
+
+
+
+
