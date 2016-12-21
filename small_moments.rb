@@ -40,7 +40,7 @@ get '/users/:id' do
 	@user = User.find(params['id'])
 	erb :user
 end
-
+# need to add: if user not found, redirect to home page
 
 
 
@@ -53,7 +53,7 @@ end
 
 
 
-#users - delete
+#users - destroy
 post '/users/:id/delete' do
 	@user = User.find(params['id'])
 	session[:user_id] = nil

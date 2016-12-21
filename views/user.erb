@@ -35,6 +35,14 @@
 		</div>
 		<input type="submit">
 	</form>
+
+	<h3>Delete Account</h3>
+	<p>Warning: If you delete your account, it is PERMANENT and FINAL.</p>
+	<button id="verify-delete">Delete</button>
+	<form method="POST" action="/users/<%= @user.id %>/delete">
+		<input type="submit" value="Delete Forever">
+	</form>
+	<!-- make this visibility hidden until the user clicks the regular delete button. then the delete permanently option will appear -->
 </div>
 
 
