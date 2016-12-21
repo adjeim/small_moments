@@ -62,3 +62,26 @@ post '/users/:id/delete' do
 end
 
 
+#posts - create
+get '/users/:id/posts/new' do
+	@user = User.find(params['id'])
+	erb :new_post
+end
+# user can create a new post on their profile
+
+post '/users/:id/posts/create' do
+	@user = User.find(params['id'])
+	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'])
+	# @post.user_id = @user.id
+	@post.save
+	redirect "users/#{@user.id}/posts/#{@post.id}"
+end
+
+
+#posts - read (individual post)
+get 'users/:id/posts/:id' do
+	erb :post
+end
+
+
+#posts - update
