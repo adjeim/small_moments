@@ -96,7 +96,7 @@ end
 post '/users/:id/posts/create' do
 	@user = User.find(params['id'])
 	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'])
-	# @post.user_id = @user.id
+
 	@post.save
 	redirect "users/#{@user.id}/posts/#{@post.id}"
 end
