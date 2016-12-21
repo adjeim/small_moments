@@ -48,7 +48,7 @@ end
 
 
 
-#users - create
+#users - create (from the home page)
 post '/users/create' do
 	@user = User.new(name: params['name'], email: params['email'], password: params['password'])
 	@user.save
@@ -68,7 +68,7 @@ end
 
 
 
-#users - updates
+#users - updates (from the user's profile page)
 post '/users/:id/update' do
 	@user = User.find(params['id'])
 	@user.update(name: params['name'], email: params['email'], password: params['password'])
@@ -77,7 +77,7 @@ end
 
 
 
-#users - destroy
+#users - destroy (from the user's profile page)
 post '/users/:id/delete' do
 	@user = User.find(params['id'])
 	session[:user_id] = nil
@@ -98,16 +98,27 @@ post '/users/:id/posts/create' do
 	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'])
 
 	@post.save
-	redirect "users/#{@user.id}/posts/#{@post.id}"
+
+	@post_number = @user.posts.length
+	# @post = @user.posts[post_number]
+	redirect "users/#{@user.id}/posts/#{@post_number}"
 end
+# this is super cool!
+# in mine, i want each user's post to be able to count up
+# add more comments to explain how this works
 
 
 #posts - read (a user's individual post)
-get '/users/:id/posts/:id' do
-	@user = User.find(params['id'])
-	@post = Post.find(params['id'])
+get '/users/:user_id/posts/:post_id' do
+	@user = User.find(params['user_id'])
+	# @post = Post.find(params['post_id'])
+	# @post = Post.where(user_id: @user.id)
+	post_number = params['post_id'].to_i-1
+	@post = @user.posts[post_number]
 	erb :post
 end
+# this is also super cool!
+# add more comments to explain how this works
 
 
 #posts - update
