@@ -95,35 +95,61 @@ end
 
 post '/users/:id/posts/create' do
 	@user = User.find(params['id'])
-	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'])
-
+	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'], tags: params['tags'])
 	@post.save
 
+	# Tag.create(name: params['tags'])
+
 	@post_number = @user.posts.length
-	# @post = @user.posts[post_number]
 	redirect "users/#{@user.id}/posts/#{@post_number}"
 end
-# this is super cool!
-# in mine, i want each user's post to be able to count up
-# add more comments to explain how this works
+# super cool -- creates a new post that one can view at the number of that user's posts
+
 
 
 #posts - read (a user's individual post)
 get '/users/:user_id/posts/:post_id' do
 	@user = User.find(params['user_id'])
-	# @post = Post.find(params['post_id'])
-	# @post = Post.where(user_id: @user.id)
+
 	post_number = params['post_id'].to_i-1
 	@post = @user.posts[post_number]
 	erb :post
 end
-# this is also super cool!
-# add more comments to explain how this works
+# super cool!
+
 
 
 #posts - update
+get '/users/:user_id/posts/:post_id/edit' do
+	@user = User.find(params['user_id'])
+	post_number = params['post_id'].to_i-1
+	@post = @user.posts[post_number]
+
+	erb :edit_post
+end
+
+
+post '/users/:user_id/posts/:post_id/update' do
+	@user = User.find(params['user_id'])
+	post_number = params['post_id'].to_i-1
+	@post = @user.posts[post_number]
+
+	@post.update(title: params['title'], content: params['content'])
+
+	redirect "users/#{@user.id}/posts/#{@post_number}"
+
+end
+# should update post, but currently doesn't update tags because tags are not working atm
+
+
+#posts - delete
 
 
 
+
+#tags - create
+
+
+#user can create a new tag or select a tag to attach to their post
 
 

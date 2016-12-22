@@ -11,11 +11,16 @@ end
 
 class Post < ActiveRecord::Base
 	has_many :comments
-	has_and_belongs_to_many :tags
+	has_many :tags, through: :post_tag
 	belongs_to :user
 end
 
 class Tag < ActiveRecord::Base
 	belongs_to :user
-	has_and_belongs_to_many :posts
+	has_many :posts, through: :post_tag
+end
+
+class PostTag < ActiveRecord::Base
+	belongs_to :post
+	belongs_to :tag
 end
