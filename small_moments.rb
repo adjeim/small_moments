@@ -108,6 +108,7 @@ post '/users/:id/posts/create' do
 	redirect "users/#{@user.id}/posts/#{@post_number}"
 end
 # super cool -- creates a new post that one can view at the number of that user's posts
+# user can select tags for their posts
 
 
 
@@ -138,12 +139,13 @@ post '/users/:user_id/posts/:post_id/update' do
 	post_number = params['post_id'].to_i-1
 	@post = @user.posts[post_number]
 
-	@post.update(title: params['title'], content: params['content'])
+	@post.update(title: params['title'], content: params['content'], tags: params['tags'])
 
 	redirect "users/#{@user.id}/posts/#{@post_number}"
 
 end
-# should update post, but currently doesn't update tags because tags are not working atm
+# should update post, but currently doesn't update tags
+# why doesn't this show?
 
 
 #posts - delete
