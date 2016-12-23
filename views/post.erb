@@ -3,4 +3,10 @@
 	<h3>A moment posted by <%= @user.name %></h3>
 	<p><%= @post.content %></p>
 
+	<% if @post.tags.length > 0 %>
+		<% @post.tags.each do |tag| %>
+			<span>#<%= tag.name %></span>
+		<% end %>
+	<% end %>
+
 </div>
