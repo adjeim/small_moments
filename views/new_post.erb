@@ -11,7 +11,12 @@
 	</div>	
 	<div>
 		<label for="tags">Tags: </label>
-		<input type="text" name="tags">
+		<select multiple name="tags[]">
+             <option value="positive">Positive</option>
+             <option value="negative">Negative</option>
+             <option value="neutral">Neutral</option>
+             <option value="other">Other</option>
+        </select>
 	</div>			
 		<input type="submit" value="Post New Moment">
 </form>

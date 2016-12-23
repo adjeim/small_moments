@@ -95,10 +95,14 @@ end
 
 post '/users/:id/posts/create' do
 	@user = User.find(params['id'])
-	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'], tags: params['tags'])
-	@post.save
 
-	# Tag.create(name: params['tags'])
+	tags = []
+    params[:tags].each do |tag|
+        tags << Tag.new(name: tag)
+    end
+
+	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'], tags: tags)
+	@post.save
 
 	@post_number = @user.posts.length
 	redirect "users/#{@user.id}/posts/#{@post_number}"
