@@ -1,0 +1,14 @@
+<div>
+	<h2><%= @user.name %>'s Small Moments</h2>
+
+
+	<% @user.posts.each do |post| %>
+		<div class="post">
+			<h3><%= post.title %></h3>
+			<p><%= post.content %></p>
+
+
+		</div>
+	<% end %>
+
+</div>

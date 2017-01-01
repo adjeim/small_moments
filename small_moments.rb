@@ -105,7 +105,7 @@ post '/users/:id/posts/create' do
 	@post.save
 
 	@post_number = @user.posts.length
-	redirect "users/#{@user.id}/posts/#{@post_number}"
+	redirect "/users/#{@user.id}/posts/#{@post_number}"
 end
 # super cool -- creates a new post that one can view at the number of that user's posts
 # user can select tags for their posts
@@ -121,6 +121,15 @@ get '/users/:user_id/posts/:post_id' do
 	erb :post
 end
 # super cool!
+
+
+#posts - read (all user's posts)
+get '/users/:user_id/posts' do
+	@user = User.find(params['user_id'])
+	@posts = @user.posts
+	@tags = @user.posts.tags
+	erb :posts
+end
 
 
 
@@ -139,9 +148,11 @@ post '/users/:user_id/posts/:post_id/update' do
 	post_number = params['post_id'].to_i-1
 	@post = @user.posts[post_number]
 
-	@post.update(title: params['title'], content: params['content'], tags: params['tags'])
+	@post.update(title: params['title'], content: params['content'])
+	@post.save
 
-	redirect "users/#{@user.id}/posts/#{@post_number}"
+	redirect "/users/#{@user.id}/posts/#{@post_number}"
+	# redirect :post
 
 end
 # should update post, but currently doesn't update tags
@@ -149,7 +160,14 @@ end
 
 
 #posts - delete
+post '/users/:user_id/posts/:post_id/delete' do
+	@user = User.find(params['user_id'])
+	post_number = params['post_id'].to_i-1
+	@post = @user.posts[post_number]
 
+	@post.destroy
+	redirect '/users/:user_id/posts'
+end
 
 
 
