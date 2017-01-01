@@ -61,7 +61,9 @@ end
 
 #users - read
 get '/users/:id' do
-	@user = User.find(params['id'])
+	@user = User.find(session[:user_id])
+	# session[:user_id] = @user.id
+	# @user = User.find(params['id'])
 	erb :user
 end
 # need to add: if user not found, redirect to home page
@@ -70,7 +72,7 @@ end
 
 #users - updates (from the user's profile page)
 post '/users/:id/update' do
-	@user = User.find(params['id'])
+	@user = User.find(session[:user_id])
 	@user.update(name: params['name'], email: params['email'], password: params['password'])
 	redirect "/users/#{@user.id}"
 end
@@ -79,7 +81,7 @@ end
 
 #users - destroy (from the user's profile page)
 post '/users/:id/delete' do
-	@user = User.find(params['id'])
+	@user = User.find(session[:user_id])
 	session[:user_id] = nil
 	@user.destroy
 	redirect '/'
@@ -87,14 +89,14 @@ end
 
 
 #posts - create
-get '/users/:id/posts/new' do
-	@user = User.find(params['id'])
+get '/posts/new' do
+	@user = User.find(session[:user_id])
 	erb :new_post
 end
 # user can create a new post on their profile
 
-post '/users/:id/posts/create' do
-	@user = User.find(params['id'])
+post '/posts/create' do
+	@user = User.find(session[:user_id])
 
 	tags = []
     params[:tags].each do |tag|
@@ -104,8 +106,8 @@ post '/users/:id/posts/create' do
 	@post = Post.new(user_id: @user.id, title: params['title'], content: params['content'], tags: tags)
 	@post.save
 
-	@post_number = @user.posts.length
-	redirect "/users/#{@user.id}/posts/#{@post_number}"
+	# @post_number = @user.posts.length
+	redirect "/posts/#{@post.id}"
 end
 # super cool -- creates a new post that one can view at the number of that user's posts
 # user can select tags for their posts
@@ -113,45 +115,45 @@ end
 
 
 #posts - read (a user's individual post)
-get '/users/:user_id/posts/:post_id' do
-	@user = User.find(params['user_id'])
-
-	post_number = params['post_id'].to_i-1
-	@post = @user.posts[post_number]
+get '/posts/:id' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params['id'])
+	# @post = @user.posts[post_number]
 	erb :post
 end
-# super cool!
 
 
 #posts - read (all user's posts)
-get '/users/:user_id/posts' do
-	@user = User.find(params['user_id'])
+get '/posts' do
+	@user = User.find(session[:user_id])
 	@posts = @user.posts
-	@tags = @user.posts.tags
+	# @tags = @user.posts.tags
 	erb :posts
 end
 
 
 
 #posts - update
-get '/users/:user_id/posts/:post_id/edit' do
-	@user = User.find(params['user_id'])
-	post_number = params['post_id'].to_i-1
-	@post = @user.posts[post_number]
+get '/posts/:id/edit' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params['id'])
+	# post_number = params['post_id'].to_i-1
+	# @post = @user.posts[post_number]
 
 	erb :edit_post
 end
 
 
-post '/users/:user_id/posts/:post_id/update' do
-	@user = User.find(params['user_id'])
-	post_number = params['post_id'].to_i-1
-	@post = @user.posts[post_number]
+post '/posts/:id/update' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params['id'])
+	# post_number = params['post_id'].to_i-1
+	# @post = @user.posts[post_number]
 
 	@post.update(title: params['title'], content: params['content'])
 	@post.save
 
-	redirect "/users/#{@user.id}/posts/#{@post_number}"
+	redirect "/posts/#{@post.id}"
 	# redirect :post
 
 end
@@ -160,13 +162,15 @@ end
 
 
 #posts - delete
-post '/users/:user_id/posts/:post_id/delete' do
-	@user = User.find(params['user_id'])
-	post_number = params['post_id'].to_i-1
-	@post = @user.posts[post_number]
+post '/posts/:id/delete' do
+	@user = User.find(session[:user_id])
+	@post = Post.find(params['id'])
+	# @user = User.find(params['user_id'])
+	# post_number = params['post_id'].to_i-1
+	# @post = @user.posts[post_number]
 
 	@post.destroy
-	redirect '/users/:user_id/posts'
+	redirect '/posts'
 end
 
 
