@@ -10,6 +10,11 @@
 	<% end %>
 
 </div>
+
+	<form method="GET" action="/posts/<%= @post.id %>/edit">
+		<input type="submit" value="Edit Post">
+	</form>
+
 	<form method="POST" action="/posts/<%= @post.id %>/delete">
 		<input type="submit" value="Delete Post Forever">
 	</form>
