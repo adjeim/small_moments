@@ -10,7 +10,31 @@
 	<div class="container">
 	<h1><a href="/">Small Moments</a></h1>
 	<h2>A place to be yourself</h2>
+		<% if session[:user_id] == nil %>
+			<div class="navigation">
+				<nav>
+					<ul>
+						<li><a href="/about">About Small Moments</a></li>
+						<!-- <li><a href="/posts">My Moments</a></li> -->
+					</ul>
+				</nav>
+			</div>
 
+		<% else %>
+			<div class="navigation">
+				<nav>
+					<ul>
+						<li><a href="/users/<%= @user.id %>">My Profile</a></li>
+						<li><a href="/posts">My Moments</a></li>
+					</ul>
+				</nav>
+
+				<form method="POST" action="/logout">
+					<input type="submit" value="Log Out">
+				</form>
+			</div>
+
+		<% end %>
 
 		<!-- if the user is logged in, show the above nav bar -->
 		<!-- else show nothing except about and signup -->

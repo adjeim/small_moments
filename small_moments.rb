@@ -196,16 +196,6 @@ get '/users/:user_id/posts/:post_id' do
 	erb :others_post
 end
 
-# see the last 10 posts by everyone
-
-# get '/posts/all' do
-# 	@posts = Post.all
-# 	# @user = Post.find(params['user_id'])
-# 	redirect '/'
-# 	# erb :recent_posts
-# end
-
-
 
 
 #tags - create
