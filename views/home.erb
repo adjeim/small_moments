@@ -33,3 +33,16 @@
 		<input type="submit">
 	</form>
 </div>
+
+<h2>Recent moments by our users:</h2>
+<div>
+	<% @posts.each do |post| %>
+		<div class="post">
+			<h2><a href="/users/<%= post.user_id %>/posts/<%= post.id %>"><%= post.title %></a></h2>
+
+			<p><%= post.content %></p>
+
+		</div>
+	<% end %>
+
+</div>

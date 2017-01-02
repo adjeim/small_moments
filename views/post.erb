@@ -1,6 +1,19 @@
+<div class="navigation">
+<nav>
+	<ul>
+		<li><a href="/users/<%= @user.id %>">My Profile</a></li>
+		<li><a href="/posts">My Moments</a></li>
+	</ul>
+</nav>
+
+<form method="POST" action="/logout">
+	<input type="submit" value="Log Out">
+</form>
+</div>
+
 <div>
 	<h2><%= @post.title %></h2>
-	<h3>A moment posted by <%= @user.name %></h3>
+	<h3>A moment posted by <a href="/users/<%= @user.id %>/posts"><%= @user.name %></a></h3>
 	<p><%= @post.content %></p>
 
 	<% if @post.tags.length > 0 %>

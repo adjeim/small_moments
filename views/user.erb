@@ -1,16 +1,27 @@
+<div class="navigation">
+	<nav>
+		<ul>
+			<li><a href="/users/<%= @user.id %>">My Profile</a></li>
+			<li><a href="/posts">My Moments</a></li>
+		</ul>
+	</nav>
+
+	<form method="POST" action="/logout">
+		<input type="submit" value="Log Out">
+	</form>
+</div>
+	
 <div class="moments-content">
 	<h2>Welcome, <%= @user.name %>!</h2>
 
 	<h3>My Moments</h3>
 
-	
+
 
 
 	<h3>My Tags</h3>
 
-	<form method="POST" action="/logout">
-		<input type="submit" value="Log Out">
-	</form>
+
 
 </div>
 

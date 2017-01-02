@@ -16,6 +16,7 @@ end
 
 # general routes
 get '/' do
+	@posts = Post.all
 	erb :home
 end
 
@@ -114,21 +115,21 @@ end
 
 
 
-#posts - read (a user's individual post)
+#posts - read (all user's own posts)
+get '/posts' do
+	@user = User.find(session[:user_id])
+	@posts = @user.posts
+	erb :posts
+
+end
+
+
+# posts - read (user's own individual post)
 get '/posts/:id' do
 	@user = User.find(session[:user_id])
 	@post = Post.find(params['id'])
 	# @post = @user.posts[post_number]
 	erb :post
-end
-
-
-#posts - read (all user's posts)
-get '/posts' do
-	@user = User.find(session[:user_id])
-	@posts = @user.posts
-	# @tags = @user.posts.tags
-	erb :posts
 end
 
 
@@ -172,6 +173,38 @@ post '/posts/:id/delete' do
 	@post.destroy
 	redirect '/posts'
 end
+
+
+
+
+# read other user's individual and collections of posts
+
+#posts - read all of another user's posts
+get '/users/:id/posts' do
+	@user = User.find(params['id'])
+	@posts = @user.posts
+	# @tags = @user.posts.tags
+	erb :others_posts
+end
+
+
+# posts - read (a user's individual post)
+get '/users/:user_id/posts/:post_id' do
+	@user = User.find(params['user_id'])
+	@post = Post.find(params['post_id'])
+	# @post = @user.posts[post_number]
+	erb :others_post
+end
+
+# see the last 10 posts by everyone
+
+# get '/posts/all' do
+# 	@posts = Post.all
+# 	# @user = Post.find(params['user_id'])
+# 	redirect '/'
+# 	# erb :recent_posts
+# end
+
 
 
 

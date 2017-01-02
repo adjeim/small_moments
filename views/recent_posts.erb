@@ -1,0 +1,11 @@
+<div>
+	<% @posts.each do |post| %>
+		<div class="post">
+			<h2><a href="posts/<%= post.id %>"><%= post.title %></a></h2>
+			<h3>A moment posted by <a href="/users/<%= post.user_id %>/posts"><%= @user.name %></a></h3>
+			<p><%= post.content %></p>
+
+		</div>
+	<% end %>
+
+</div>
