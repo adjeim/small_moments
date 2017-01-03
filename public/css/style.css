@@ -41,4 +41,23 @@ a {
   clear: both;
   padding-top: 26px; }
 
+.submit-button {
+  font-size: 16px; }
+
+.post {
+  margin-bottom: 24px;
+  padding: 8px;
+  border: 3px inset #4a1779;
+  width: 70%; }
+
+.update-form .post-title {
+  margin-bottom: 16px; }
+.update-form .post-content {
+  margin-bottom: 16px; }
+  .update-form .post-content textarea {
+    width: 400px;
+    height: 40px; }
+.update-form .post-tags {
+  margin-bottom: 10px; }
+
 /*# sourceMappingURL=style.css.map */

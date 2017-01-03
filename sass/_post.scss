@@ -1,0 +1,30 @@
+.post {
+	margin-bottom: 24px;
+	padding: 8px;
+	border: 3px inset $purple;
+	width: 70%;
+	// margin: 24px auto;
+}
+
+.update-form {
+	.post-title {
+		margin-bottom: 16px;
+	}
+
+	.post-content {
+
+		margin-bottom: 16px;
+
+		textarea{
+			width: 400px;
+			height: 40px;
+
+		}
+	}
+
+	.post-tags {
+		margin-bottom: 10px;
+	}
+
+
+}

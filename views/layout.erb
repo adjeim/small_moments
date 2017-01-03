@@ -9,15 +9,15 @@
 </head>
 <body>
 	<div class="container">
-	<header>
-		<h1><a href="/">Small Moments</a></h1>
-		<h2>a place to be yourself</h2>
+		<header>
+			<h1><a href="/">Small Moments</a></h1>
+			<h2>a place to be yourself</h2>
+			
 			<% if session[:user_id] == nil %>
 				<div class="navigation">
 					<nav>
 						<ul>
 							<li><a href="/about">About Small Moments</a></li>
-							<!-- <li><a href="/posts">My Moments</a></li> -->
 						</ul>
 					</nav>
 				</div>
@@ -38,23 +38,15 @@
 							</li>
 						</ul>
 					</nav>
-
-
-
 				</div>
-
 			<% end %>
 		</header>
 
-		<!-- if the user is logged in, show the above nav bar -->
-		<!-- else show nothing except about and signup -->
-		<!-- if time allows, create a search user that lets you look people up by email -->
-
-	<div class="content-container">
-		<div class="notice"><%= flash[:notice] if flash[:notice] %></div>
-		<div class="alert"><%= flash[:alert] if flash[:alert] %></div>
-		<%= yield %>
-	</div>
+		<div class="content-container">
+			<div class="notice"><%= flash[:notice] if flash[:notice] %></div>
+			<div class="alert"><%= flash[:alert] if flash[:alert] %></div>
+			<%= yield %>
+		</div>
 
 	</div>
 
