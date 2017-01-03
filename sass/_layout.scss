@@ -1,0 +1,50 @@
+$purple: rgb(74, 23, 121);
+
+body {
+	box-sizing: border-box;
+	font-family: 'Karla', sans-serif;
+}
+
+header {
+
+	h1 {
+		font-family: 'Gloria Hallelujah', cursive;
+		margin-bottom: 0;
+		color: $purple;
+		font-size: 35px;
+
+	}
+
+	h2 {
+
+		font-family: 'Indie Flower', cursive;
+		margin-top: 0;
+	}
+
+	nav li {
+		list-style-type: none;
+		color: $purple;
+
+	}
+
+	.inline-form {
+		display: inline;
+	}
+
+	.link-button {
+		background: none;
+		border: none;
+		color: $purple;
+		cursor: pointer;
+		font-size: 14px;
+		padding: 0;
+	}
+
+
+}
+
+
+a {
+	text-decoration: none;
+	color: $purple;
+}

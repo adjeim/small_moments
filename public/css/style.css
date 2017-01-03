@@ -1,0 +1,44 @@
+body {
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif; }
+
+header h1 {
+  font-family: 'Gloria Hallelujah', cursive;
+  margin-bottom: 0;
+  color: #4a1779;
+  font-size: 35px; }
+header h2 {
+  font-family: 'Indie Flower', cursive;
+  margin-top: 0; }
+header nav li {
+  list-style-type: none;
+  color: #4a1779; }
+header .inline-form {
+  display: inline; }
+header .link-button {
+  background: none;
+  border: none;
+  color: #4a1779;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0; }
+
+a {
+  text-decoration: none;
+  color: #4a1779; }
+
+.signin {
+  float: left;
+  width: 45%;
+  margin: 5px;
+  padding: 10px;
+  height: 150px;
+  background-color: aliceblue; }
+  .signin h2 {
+    text-align: center; }
+
+.recent {
+  clear: both;
+  padding-top: 26px; }
+
+/*# sourceMappingURL=style.css.map */
